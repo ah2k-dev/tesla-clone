@@ -22,3 +22,6 @@ body{
     transform: translateY(4px);
   }
 }
+a{
+  text-decoration: none;
+}
