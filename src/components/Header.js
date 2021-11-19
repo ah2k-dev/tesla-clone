@@ -3,18 +3,21 @@ import { useState } from 'react';
 import styled from 'styled-components'
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
+import {selectCars} from '../features/Car/carSlice';
+import { useSelector } from 'react-redux';
 function Header() {
     const [sidebarStatus, setSidebarStatus] = useState(false)
+    const cars = useSelector(selectCars)
+    console.log(cars);
     return (
         <Container>
             <a>
                 <img src="/images/logo.svg" />
             </a>
             <Menu>
-                <a href="">Model S</a>
-                <a href="">Model 3</a>
-                <a href="">Model X</a>
-                <a href="">Model Y</a>
+                {cars.map ((car, index)=>(
+                    <a key={index} href="">{car}</a>
+                ))}
             </Menu>
             <RightMenu>
                 <a href="">Shop</a>
@@ -25,10 +28,9 @@ function Header() {
                 <CloseWrapper>
                     <CustomClose onClick={()=>setSidebarStatus(false)}/>
                 </CloseWrapper>
-                <li><a href="">Model S</a></li>
-                <li><a href="">Model 3</a></li>
-                <li><a href="">Model X</a></li>
-                <li><a href="">Model y</a></li>
+                {cars.map ((car, index)=>(
+                   <li> <a key={index} href="">{car}</a></li>
+                ))}
                 <li><a href="">Existing Inventory</a></li>
                 <li><a href="">Used Inventory</a></li>
                 <li><a href="">Trade In</a></li>
